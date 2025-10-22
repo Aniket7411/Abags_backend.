@@ -1,0 +1,199 @@
+### Health Check
+GET http://localhost:5000
+
+###
+
+### Register New User
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "test123",
+  "phone": "9876543210"
+}
+
+###
+
+### Login Admin
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@kanbags.com",
+  "password": "admin123"
+}
+
+###
+
+### Login Buyer
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "buyer123"
+}
+
+###
+
+### Verify Token (Replace TOKEN with your JWT)
+GET http://localhost:5000/api/v1/auth/verify
+Authorization: Bearer TOKEN
+
+###
+
+### Get All Products
+GET http://localhost:5000/api/v1/products
+
+###
+
+### Get Products with Filters
+GET http://localhost:5000/api/v1/products?category=office&material=leather&minPrice=1000&maxPrice=5000&sortBy=price-low
+
+###
+
+### Get Featured Products
+GET http://localhost:5000/api/v1/products/featured
+
+###
+
+### Get Single Product (Replace with actual product ID)
+GET http://localhost:5000/api/v1/products/PRODUCT_ID
+
+###
+
+### Create Product (Admin only - Replace TOKEN)
+POST http://localhost:5000/api/v1/products
+Authorization: Bearer TOKEN
+Content-Type: application/json
+
+{
+  "name": "New Leather Bag",
+  "category": "office",
+  "material": "leather",
+  "price": 2999,
+  "originalPrice": 3999,
+  "description": "Beautiful new leather bag",
+  "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+  "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62"],
+  "stock": 50,
+  "featured": false
+}
+
+###
+
+### Get Active Coupons
+GET http://localhost:5000/api/v1/coupons/active
+
+###
+
+### Validate Coupon
+POST http://localhost:5000/api/v1/coupons/validate
+Content-Type: application/json
+
+{
+  "code": "LAUNCH50",
+  "cartTotal": 2500
+}
+
+###
+
+### Get Active Advertisements
+GET http://localhost:5000/api/v1/advertisements/active
+
+###
+
+### Submit Bulk Inquiry
+POST http://localhost:5000/api/v1/inquiries/bulk
+Content-Type: application/json
+
+{
+  "name": "Rajesh Kumar",
+  "email": "rajesh@business.com",
+  "phone": "9876543210",
+  "businessName": "Kumar Retail",
+  "businessType": "retailer",
+  "quantity": "100 pieces per month",
+  "message": "Looking for wholesale rates"
+}
+
+###
+
+### Place Order (Replace TOKEN and PRODUCT_ID)
+POST http://localhost:5000/api/v1/orders
+Authorization: Bearer TOKEN
+Content-Type: application/json
+
+{
+  "products": [
+    {
+      "productId": "PRODUCT_ID",
+      "name": "Executive Briefcase",
+      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+      "quantity": 1,
+      "price": 3499
+    }
+  ],
+  "shippingAddress": {
+    "name": "John Doe",
+    "phone": "9876543210",
+    "street": "123 Main Street",
+    "city": "Kanpur",
+    "state": "Uttar Pradesh",
+    "pincode": "208001"
+  },
+  "total": 3499,
+  "discount": 0,
+  "shippingCost": 0,
+  "finalTotal": 3499,
+  "paymentMethod": "cod"
+}
+
+###
+
+### Get User Orders (Replace TOKEN and USER_ID)
+GET http://localhost:5000/api/v1/orders/user/USER_ID
+Authorization: Bearer TOKEN
+
+###
+
+### Get All Orders (Admin - Replace TOKEN)
+GET http://localhost:5000/api/v1/orders
+Authorization: Bearer TOKEN
+
+###
+
+### Get Single Order (Replace TOKEN and ORDER_ID)
+GET http://localhost:5000/api/v1/orders/ORDER_ID
+Authorization: Bearer TOKEN
+
+###
+
+### Cancel Order (Replace TOKEN and ORDER_ID)
+PUT http://localhost:5000/api/v1/orders/ORDER_ID/cancel
+Authorization: Bearer TOKEN
+Content-Type: application/json
+
+{
+  "reason": "Changed my mind"
+}
+
+###
+
+### Update Order Status (Admin - Replace TOKEN and ORDER_ID)
+PUT http://localhost:5000/api/v1/orders/ORDER_ID/status
+Authorization: Bearer TOKEN
+Content-Type: application/json
+
+{
+  "status": "shipped",
+  "trackingNumber": "TRK123456789"
+}
+
+###
+
+
+
+
